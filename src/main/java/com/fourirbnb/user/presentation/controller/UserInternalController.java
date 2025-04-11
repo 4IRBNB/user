@@ -1,7 +1,7 @@
-package com.fouribnb.user.presentation.controller;
+package com.fourirbnb.user.presentation.controller;
 
-import com.fouribnb.user.application.service.UserService;
-import com.fouribnb.user.presentation.dto.response.UserResponse;
+import com.fourirbnb.user.application.service.UserService;
+import com.fourirbnb.user.presentation.dto.response.UserResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

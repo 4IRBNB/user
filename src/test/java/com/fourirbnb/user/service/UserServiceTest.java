@@ -1,13 +1,13 @@
-package com.fouribnb.user.service;
+package com.fourirbnb.user.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
-import com.fouribnb.user.application.mapper.UserMapper;
-import com.fouribnb.user.application.service.UserService;
-import com.fouribnb.user.domain.entity.User;
-import com.fouribnb.user.domain.repository.UserRepository;
-import com.fouribnb.user.presentation.dto.response.UserResponse;
+import com.fourirbnb.user.application.mapper.UserMapper;
+import com.fourirbnb.user.application.service.UserService;
+import com.fourirbnb.user.domain.entity.User;
+import com.fourirbnb.user.domain.repository.UserRepository;
+import com.fourirbnb.user.presentation.dto.response.UserResponse;
 import java.util.Optional;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

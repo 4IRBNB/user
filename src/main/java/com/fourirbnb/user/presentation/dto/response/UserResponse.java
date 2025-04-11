@@ -1,4 +1,4 @@
-package com.fouribnb.user.presentation.dto.response;
+package com.fourirbnb.user.presentation.dto.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

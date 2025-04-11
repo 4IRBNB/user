@@ -1,4 +1,4 @@
-package com.fouribnb.user.presentation.controller;
+package com.fourirbnb.user.presentation.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RequestMapping;

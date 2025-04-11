@@ -1,6 +1,6 @@
-package com.fouribnb.user.domain.entity;
+package com.fourirbnb.user.domain.entity;
 
-import com.fourirrbnb.common.domain.BasicEntity;
+import com.fourirbnb.common.domain.BasicEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;

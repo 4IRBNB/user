@@ -1,4 +1,4 @@
-package com.fouribnb.user.controller;
+package com.fourirbnb.user.controller;
 
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -6,9 +6,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import com.fouribnb.user.application.service.UserService;
-import com.fouribnb.user.presentation.controller.UserInternalController;
-import com.fouribnb.user.presentation.dto.response.UserResponse;
+import com.fourirbnb.user.application.service.UserService;
+import com.fourirbnb.user.presentation.controller.UserInternalController;
+import com.fourirbnb.user.presentation.dto.response.UserResponse;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;

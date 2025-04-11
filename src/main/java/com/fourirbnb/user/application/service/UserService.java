@@ -1,9 +1,9 @@
-package com.fouribnb.user.application.service;
+package com.fourirbnb.user.application.service;
 
-import com.fouribnb.user.application.mapper.UserMapper;
-import com.fouribnb.user.domain.entity.User;
-import com.fouribnb.user.domain.repository.UserRepository;
-import com.fouribnb.user.presentation.dto.response.UserResponse;
+import com.fourirbnb.user.application.mapper.UserMapper;
+import com.fourirbnb.user.domain.entity.User;
+import com.fourirbnb.user.domain.repository.UserRepository;
+import com.fourirbnb.user.presentation.dto.response.UserResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

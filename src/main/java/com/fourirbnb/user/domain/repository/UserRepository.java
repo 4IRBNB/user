@@ -1,7 +1,7 @@
-package com.fouribnb.user.domain.repository;
+package com.fourirbnb.user.domain.repository;
 
 
-import com.fouribnb.user.domain.entity.User;
+import com.fourirbnb.user.domain.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 
