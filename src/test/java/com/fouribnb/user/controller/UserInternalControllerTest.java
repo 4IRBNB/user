@@ -22,7 +22,7 @@ class UserInternalControllerTest {
   private MockMvc mockMvc;
 
   @MockBean
-  private UserService userService; // ✅ 내부 서비스는 Mock 처리
+  private UserService userService;
 
   @Test
   void 유저조회_성공() throws Exception {
