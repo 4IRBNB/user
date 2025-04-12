@@ -16,6 +16,7 @@ import lombok.NoArgsConstructor;
 public class User extends BasicEntity {
 
   @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   public Long id;
 
   @Column(nullable = false, unique = true)
@@ -25,17 +26,13 @@ public class User extends BasicEntity {
   public String username;
 
   @Column(nullable = false)
-  public String password;
-
-  @Column(nullable = false)
   public String nickname;
 
   @Column(nullable = false)
   public String slackId;
 
   @Column(nullable = false)
-  @Enumerated(EnumType.STRING)
-  public Role role;
+  public String role;
 
   public String phone;
 

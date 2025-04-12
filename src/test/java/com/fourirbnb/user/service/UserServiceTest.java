@@ -4,7 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
 import com.fourirbnb.user.application.mapper.UserMapper;
-import com.fourirbnb.user.application.service.UserService;
+import com.fourirbnb.user.application.service.UserInternalService;
 import com.fourirbnb.user.domain.entity.User;
 import com.fourirbnb.user.domain.repository.UserRepository;
 import com.fourirbnb.user.presentation.dto.response.UserResponse;
@@ -25,7 +25,7 @@ class UserServiceTest {
   private UserMapper mapper;
 
   @InjectMocks
-  private UserService userService;
+  private UserInternalService userInternalService;
 
   @Test
   void getUserById() {
@@ -41,23 +41,10 @@ class UserServiceTest {
     when(mapper.toResponse(user)).thenReturn(response);
 
     // when
-    UserResponse result = userService.getUserById(id);
+    UserResponse result = userInternalService.getUserById(id);
 
     // then
     assertThat(result.getEmail()).isEqualTo("test@example.com");
     assertThat(result.getUsername()).isEqualTo("test");
-  }
-
-  @Test
-  void existsByEmail() {
-    // given
-    String email = "test@naver.com";
-    when(repository.existsByEmail(email)).thenReturn(true);
-
-    // when
-    boolean exists = userService.existsByEmail(email);
-
-    // then
-    assertThat(exists).isTrue();
   }
 }
