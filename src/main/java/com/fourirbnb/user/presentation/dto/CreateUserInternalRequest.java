@@ -1,17 +1,19 @@
-package com.fourirbnb.user.presentation.dto.request;
+package com.fourirbnb.user.presentation.dto;
 
+import com.fourirbnb.user.domain.entity.Role;
 import lombok.Builder;
 import lombok.Getter;
 
 @Getter
 @Builder
-public class CreateUserRequest {
-
+public class CreateUserInternalRequest {
+  
   private String email;
+  private String password;
   private String nickname;
   private String username;
   private String phone;
   private String slackId;
-  private String role;
+  private Role role;
 
 }
