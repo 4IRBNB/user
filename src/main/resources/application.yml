@@ -33,3 +33,6 @@ eureka:
 #    web:
 #      exposure:
 #        include: refresh
+common:
+  jpa:
+    enabled: true

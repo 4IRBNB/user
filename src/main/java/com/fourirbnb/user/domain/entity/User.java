@@ -1,6 +1,7 @@
 package com.fourirbnb.user.domain.entity;
 
-import com.fourirbnb.common.domain.BasicEntity;
+
+import com.fourirbnb.common.domain.BaseEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -17,7 +18,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @Table(name = "p_user")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class User extends BasicEntity {
+public class User extends BaseEntity {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
