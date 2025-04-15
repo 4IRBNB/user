@@ -1,8 +1,11 @@
 package com.fourirbnb.user.presentation.controller;
 
 import com.fourirbnb.common.exception.InvalidParameterException;
-import com.fourirbnb.user.application.service.UserInternalService;
+import com.fourirbnb.common.security.AuthenticatedUser;
+import com.fourirbnb.common.security.UserInfo;
+import com.fourirbnb.user.application.service.UserService;
 import com.fourirbnb.user.presentation.dto.CreateUserInternalRequest;
+import com.fourirbnb.user.presentation.dto.UserInternalResponse;
 import com.fourirbnb.user.presentation.dto.UserResponseDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -21,17 +24,17 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 public class UserInternalController {
 
-  private final UserInternalService userInternalService;
+  private final UserService userService;
 
   @GetMapping("/{id}")
   public ResponseEntity<UserResponseDto> getUserById(@PathVariable Long id) {
-    UserResponseDto response = userInternalService.getUserById(id);
+    UserResponseDto response = userService.getUserById(id);
     return ResponseEntity.ok(response);
   }
 
   @GetMapping("/email/{email}")
   public ResponseEntity<UserResponseDto> findByUser(@PathVariable String email) {
-    UserResponseDto dto = userInternalService.findByUser(email);
+    UserResponseDto dto = userService.getUserByEmail(email);
     return ResponseEntity.ok(dto);
   }
 
@@ -40,10 +43,27 @@ public class UserInternalController {
   public ResponseEntity<?> userSignUp(
       @RequestBody CreateUserInternalRequest request) {
     try {
-      userInternalService.createUser(request);
+      userService.createUser(request);
       return ResponseEntity.status(HttpStatus.CREATED).build();
     } catch (InvalidParameterException e) {
       return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
     }
   }
+
+  @GetMapping
+  public ResponseEntity<UserInternalResponse> getEncryptedPassword(
+      @AuthenticatedUser UserInfo user) {
+    Long userId = user.getUserId();
+    UserInternalResponse response = userService.getEncryptedPassword(userId);
+    return ResponseEntity.ok(response);
+  }
+
+  @GetMapping("/updatePassword")
+  public ResponseEntity<CreateUserInternalRequest> updatePassword(
+      @AuthenticatedUser UserInfo user, String password) {
+    Long userId = user.getUserId();
+    userService.updatePassword(userId, password);
+    return ResponseEntity.status(HttpStatus.CREATED).build();
+  }
+
 }

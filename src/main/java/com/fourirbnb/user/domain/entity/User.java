@@ -2,6 +2,7 @@ package com.fourirbnb.user.domain.entity;
 
 
 import com.fourirbnb.common.domain.BaseEntity;
+import com.fourirbnb.user.presentation.dto.UpdateUserRequest;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -56,4 +57,14 @@ public class User extends BaseEntity {
     this.role = role;
   }
 
+
+  public void update(UpdateUserRequest request) {
+    this.nickname = request.getNickname();
+    this.phone = request.getPhone();
+    this.slackId = request.getSlackId();
+  }
+
+  public void updatePassword(String encodedPassword) {
+    this.password = encodedPassword;
+  }
 }
