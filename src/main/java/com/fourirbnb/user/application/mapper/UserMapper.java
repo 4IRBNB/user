@@ -1,5 +1,8 @@
 package com.fourirbnb.user.application.mapper;
 
+import com.fourirbnb.user.application.dto.ApprovalUserInternalRequest;
+import com.fourirbnb.user.domain.entity.ApprovalStatus;
+import com.fourirbnb.user.domain.entity.Staging;
 import com.fourirbnb.user.domain.entity.User;
 import com.fourirbnb.user.presentation.dto.CreateUserInternalRequest;
 import com.fourirbnb.user.presentation.dto.UserInternalResponse;
@@ -16,7 +19,8 @@ public class UserMapper {
         request.getUsername(),
         request.getPhone(),
         request.getSlackId(),
-        request.getRole()
+        request.getRole(),
+        ApprovalStatus.APPROVED
     );
   }
 
@@ -40,5 +44,45 @@ public class UserMapper {
     );
   }
 
+  public static ApprovalUserInternalRequest withStatus(CreateUserInternalRequest request,
+      ApprovalStatus status) {
+    return ApprovalUserInternalRequest.builder()
+        .email(request.getEmail())
+        .password(request.getPassword())
+        .nickname(request.getNickname())
+        .username(request.getUsername())
+        .slackId(request.getSlackId())
+        .phone(request.getPhone())
+        .role(request.getRole())
+        .status(status)
+        .build();
+  }
+
+  public static Staging toStagingEntity(ApprovalUserInternalRequest request) {
+    return new Staging(
+        request.getEmail(),
+        request.getPassword(),
+        request.getUsername(),
+        request.getNickname(),
+        request.getSlackId(),
+        request.getPhone(),
+        request.getRole(),
+        request.getStatus()
+    );
+
+  }
+
+  public static User toEntity(Staging staging) {
+    return new User(
+        staging.getEmail(),
+        staging.getPassword(),
+        staging.getNickname(),
+        staging.getUsername(),
+        staging.getPhone(),
+        staging.getSlackId(),
+        staging.getRole(),
+        ApprovalStatus.APPROVED
+    );
+  }
 
 }

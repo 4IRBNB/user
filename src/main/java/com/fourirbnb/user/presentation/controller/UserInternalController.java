@@ -3,6 +3,7 @@ package com.fourirbnb.user.presentation.controller;
 import com.fourirbnb.common.exception.InvalidParameterException;
 import com.fourirbnb.user.application.service.UserService;
 import com.fourirbnb.user.presentation.dto.CreateUserInternalRequest;
+import com.fourirbnb.user.presentation.dto.UpdatePasswordRequest;
 import com.fourirbnb.user.presentation.dto.UserInternalResponse;
 import com.fourirbnb.user.presentation.dto.UserResponseDto;
 import lombok.RequiredArgsConstructor;
@@ -36,12 +37,25 @@ public class UserInternalController {
     return ResponseEntity.ok(dto);
   }
 
-  //request 다시 검증이 필요할까?
+
   @PostMapping("/signUp")
   public ResponseEntity<?> userSignUp(
       @RequestBody CreateUserInternalRequest request) {
     try {
       userService.createUser(request);
+      return ResponseEntity.status(HttpStatus.CREATED).build();
+    } catch (InvalidParameterException e) {
+      return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+    }
+  }
+
+  @PostMapping("/saveStaging")
+  public ResponseEntity<?> saveStagingRequest(@RequestBody CreateUserInternalRequest feignRequest) {
+    try {
+      System.out.println("feign 넘어옴 시작");
+      System.out.println(feignRequest.getRole() + "요청값");
+      userService.createUser(feignRequest);
+      System.out.println("끝남");
       return ResponseEntity.status(HttpStatus.CREATED).build();
     } catch (InvalidParameterException e) {
       return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
@@ -57,8 +71,8 @@ public class UserInternalController {
 
   @GetMapping("/updatePassword")
   public ResponseEntity<Void> updatePassword(
-      Long id, String password) {
-    userService.updatePassword(id, password);
+      @RequestBody UpdatePasswordRequest request) {
+    userService.updatePassword(request.getId(), request.getPassword());
     return ResponseEntity.status(HttpStatus.CREATED).build();
   }
 
