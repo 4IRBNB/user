@@ -1,8 +1,6 @@
 package com.fourirbnb.user.domain.entity;
 
-
 import com.fourirbnb.common.domain.BaseEntity;
-import com.fourirbnb.user.presentation.dto.UpdateUserRequest;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -11,15 +9,14 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@Entity
 @Getter
-@Table(name = "p_user")
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class User extends BaseEntity {
+@NoArgsConstructor
+@Entity
+@Table(name = "p_admin")
+public class Admin extends BaseEntity {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -50,26 +47,17 @@ public class User extends BaseEntity {
   @Enumerated(EnumType.STRING)
   private ApprovalStatus approvalStatus;
 
-  public User(String email, String password, String nickname, String username, String phone,
+  public Admin(String email, String password, String nickname, String username, String phone,
       String slackId, Role role, ApprovalStatus status) {
     this.email = email;
     this.password = password;
-    this.nickname = nickname;
     this.username = username;
+    this.nickname = nickname;
     this.phone = phone;
-    this.slackId = slackId;
     this.role = role;
+    this.slackId = slackId;
     this.approvalStatus = status;
   }
 
 
-  public void update(UpdateUserRequest request) {
-    this.nickname = request.getNickname();
-    this.phone = request.getPhone();
-    this.slackId = request.getSlackId();
-  }
-
-  public void updatePassword(String encodedPassword) {
-    this.password = encodedPassword;
-  }
 }
