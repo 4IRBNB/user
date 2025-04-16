@@ -1,8 +1,6 @@
 package com.fourirbnb.user.presentation.controller;
 
 import com.fourirbnb.common.exception.InvalidParameterException;
-import com.fourirbnb.common.security.AuthenticatedUser;
-import com.fourirbnb.common.security.UserInfo;
 import com.fourirbnb.user.application.service.UserService;
 import com.fourirbnb.user.presentation.dto.CreateUserInternalRequest;
 import com.fourirbnb.user.presentation.dto.UserInternalResponse;
@@ -52,17 +50,15 @@ public class UserInternalController {
 
   @GetMapping
   public ResponseEntity<UserInternalResponse> getEncryptedPassword(
-      @AuthenticatedUser UserInfo user) {
-    Long userId = user.getUserId();
-    UserInternalResponse response = userService.getEncryptedPassword(userId);
+      Long id) {
+    UserInternalResponse response = userService.getEncryptedPassword(id);
     return ResponseEntity.ok(response);
   }
 
   @GetMapping("/updatePassword")
-  public ResponseEntity<CreateUserInternalRequest> updatePassword(
-      @AuthenticatedUser UserInfo user, String password) {
-    Long userId = user.getUserId();
-    userService.updatePassword(userId, password);
+  public ResponseEntity<Void> updatePassword(
+      Long id, String password) {
+    userService.updatePassword(id, password);
     return ResponseEntity.status(HttpStatus.CREATED).build();
   }
 

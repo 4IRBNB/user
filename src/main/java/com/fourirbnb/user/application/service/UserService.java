@@ -24,6 +24,7 @@ public class UserService {
 
   private final UserRepository userRepository;
 
+  //캐싱 적용예정
   @Transactional(readOnly = true)
   public UserResponseDto getUserById(Long id) {
     User user = findUserByIdOrThrow(id);
