@@ -23,6 +23,8 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -36,7 +38,14 @@ public class UserService {
   private final StagingRepository stagingRepository;
   private final AdminRepository adminRepository;
 
-  //캐싱 적용예정
+  /*
+      현재 로그아웃시 - 캐쉬 만료 처리
+      로그아웃이 아닌 사용자가 브라우저를 강제종료를 한다면? - 로그아웃처리 X 캐쉬 유지
+      비정상 상황가정시 캐싱 만료처리가 필요
+      결론적으로 TTL 도 필요할것으로 예상
+      생각 좀 해봐야겟다
+   */
+  @Cacheable(value = "userInfo", key = "#id")
   @Transactional(readOnly = true)
   public UserResponseDto getUserById(Long id) {
     User user = findUserByIdOrThrow(id);
@@ -99,6 +108,7 @@ public class UserService {
     }
   }
 
+  @CacheEvict(value = "userInfo", key = "#id")
   @Transactional
   public UserResponseDto updateUser(Long id, UpdateUserRequest request) {
     User user = findUserByIdOrThrow(id);
@@ -106,6 +116,7 @@ public class UserService {
     return UserMapper.toResponse(user);
   }
 
+  @CacheEvict(value = "userInfo", key = "#id")
   @Transactional
   public void deleteUser(Long id) {
     User user = findUserByIdOrThrow(id);
